@@ -31,6 +31,7 @@ class RelationshipsTest extends TestCase
     // TASK: this table throws an error, fix it
     public function test_task_with_no_user()
     {
+        $this->withoutExceptionHandling();
         Task::create(['name' => 'Some task']);
 
         $response = $this->get('/tasks');
@@ -43,7 +44,7 @@ class RelationshipsTest extends TestCase
     {
         $user = User::factory()->create();
         $task = Task::create([
-            'users_id' => $user->id,
+            'user_id' => $user->id,
             'name' => 'Some task'
         ]);
         Comment::create([
@@ -92,6 +93,7 @@ class RelationshipsTest extends TestCase
     // TASK: average number from the relationship
     public function test_countries_with_team_size()
     {
+        $this->withoutExceptionHandling();
         $country = Country::create(['name' => 'United Kingdom']);
         Team::create([
             'name' => 'Team 1',
